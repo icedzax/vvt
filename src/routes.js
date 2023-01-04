@@ -1,18 +1,17 @@
-import Home from './views/Home.vue'
-import About from './views/About.vue'
-import NotFound from './views/NotFound.vue'
+import { createRouter, createWebHashHistory } from "vue-router";
 
-/** @type {import('vue-router').RouterOptions['routes']} */
-export const routes = [
-  { path: '/', component: Home, meta: { title: 'Home' } },
-  {
-    path: '/about',
-    meta: { title: 'About' },
-    component: About,
-    // example of route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import('./views/About.vue')
-  },
-  { path: '/:path(.*)', component: NotFound },
-]
+const response = await fetch(`/src/mockroutes.json`);
+const routesJson = await response.json();
+const nroute = routesJson.map((item) => ({
+  ...item,
+  component: () => import(`/src/views/${item.name}.vue`),
+}));
+
+console.log(nroute);
+
+const router = createRouter({
+  history: createWebHashHistory(),
+  linkExactActiveClass: "active",
+  routes: nroute,
+});
+export default router;
