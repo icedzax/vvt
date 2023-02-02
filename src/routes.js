@@ -1,17 +1,25 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 
-const response = await fetch(`/src/mockroutes.json`);
-const routesJson = await response.json();
-const nroute = routesJson.map((item) => ({
-  ...item,
-  component: () => import(`/src/views/${item.name}.vue`),
-}));
+import genRoute from "./routes/genRoute";
+import generateRoutes from "./routes/generateRoutes";
+const routes = [
+  {
+    path: "/about",
+    name: "About",
+    component: () => import(`/src/views/about.vue`),
+  },
+  {
+    path: "/",
+    name: "Home",
+    component: () => import(`/src/views/home.vue`),
+  },
 
-console.log(nroute);
+  generateRoutes,
+];
 
 const router = createRouter({
   history: createWebHashHistory(),
   linkExactActiveClass: "active",
-  routes: nroute,
+  routes: routes,
 });
 export default router;

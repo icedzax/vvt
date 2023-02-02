@@ -1,12 +1,25 @@
-[
-  {
-    "path": "/about",
-    "name": "About",
-    "component": "about"
-  },
-  {
-    "path": "/",
-    "name": "Home",
-    "component": "home"
-  }
-]
+{
+  "path": "/receive",
+  "name": "Receive",
+
+  "children": [
+    {
+      "path": "",
+      "name": "ReceiveIndexView",
+
+      "meta": {
+        "screen": "IndexView",
+        "hasPermission": ""
+      }
+    },
+    {
+      "path": "/udarm0001",
+      "name": "udarm0001",
+
+      "meta": {
+        "screen": "",
+        "hasPermission": ""
+      }
+    }
+  ]
+}
